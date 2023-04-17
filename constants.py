@@ -1,4 +1,5 @@
 import pygame
+import pygame_gui
 
 INITIAL_MAP = [
   [1, 1, 2, 1, 1, 1, 1, 2, 1, 1],
@@ -41,6 +42,7 @@ NONE = (0, 0)
 BLACK = (0, 0, 0)
 WHITE = (255, 255, 255)
 BROWN = (150, 75, 0)
+YELLOW = (255, 255, 0)
 
 SCREEN = pygame.display.set_mode((SCREEN_WIDTH, SCREEN_HEIGHT))
 
@@ -53,8 +55,8 @@ dog1 = pygame.image.load("assets/images/dog1.png")
 DOG1 = pygame.transform.scale(dog1, (TILE_SIZE, TILE_SIZE))
 dog2 = pygame.image.load("assets/images/dog2.png")
 DOG2 = pygame.transform.scale(dog2, (TILE_SIZE, TILE_SIZE))
-treat = pygame.image.load("assets/images/treat.png")
-TREAT_IMG = pygame.transform.scale(treat, (TILE_SIZE / 4, TILE_SIZE / 4))
+wall_img = pygame.image.load("assets/images/wall.jpeg")
+WALL_IMG = pygame.transform.scale(wall_img, (TILE_SIZE, TILE_SIZE))
 
 def draw_dog(target_rect, image):
   SCREEN.blit(image, target_rect)
@@ -63,11 +65,14 @@ def draw_cat(target_rect):
   SCREEN.blit(CAT, target_rect)
 
 def draw_circle(row, col, screen):
-  screen.blit(TREAT_IMG, (col * TILE_SIZE + TILE_SIZE // 2 - TREAT_IMG.get_height() / 2, row * TILE_SIZE + TILE_SIZE // 2 - TREAT_IMG.get_width() / 2))
+  pygame.draw.circle(screen, BROWN, (col * TILE_SIZE + TILE_SIZE // 2, row * TILE_SIZE + TILE_SIZE // 2), 4)
+
+def draw_wall(target_rect, image):
+  SCREEN.blit(image, target_rect)
 
 TILE_MAP = {
   FREE: (BLACK, None),
-  WALL: (BROWN, None),
+  WALL: (None, draw_wall),
   TREAT: (BLACK, draw_circle),
   ENEMY: (None, draw_dog),
   ENEMY1: (None, draw_dog),
@@ -77,3 +82,5 @@ TILE_MAP = {
 }
 
 FPS = 90
+
+UI = pygame_gui.UIManager(SCREEN.get_size())

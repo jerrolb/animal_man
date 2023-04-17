@@ -2,24 +2,31 @@ import pygame
 import pygame_gui
 import sys
 import random
-from constants import *
 
 pygame.init()
+
+from constants import *
+from screens.main_menu import *
+from screens.credits import *
+
 pygame.display.set_caption("Cat-man")
 pygame.time.set_timer(MOVE_ENEMY, ENEMY_SPEED_INTERVAL)
 collect_treat = pygame.mixer.Sound('assets/sounds/collect_treat.wav')
 clock = pygame.time.Clock()
 
-gui_manager = pygame_gui.UIManager(SCREEN.get_size())
-
 class Game:
   def __init__(self):
     self.collected = 0
     self.game_over = False
+    self.running = False
     self.enemy1 = Enemy(6, 1, DOG1)
     self.enemy2 = Enemy(2, 8, DOG2)
 
-  def restart_game(self):
+  def start(self):
+    SCREEN.fill(BLACK)
+    close_main_menu()
+    main_menu_button.hide()
+    self.running = True
     self.collected = 0
     player.x = 1
     player.y = 1
@@ -30,6 +37,18 @@ class Game:
     draw_initial_screen()
     self.enemy1 = Enemy(6, 1, DOG1)
     self.enemy2 = Enemy(2, 8, DOG2)
+
+  def stop(self):
+    self.running = False
+    self.game_over = True
+
+  def end_game(self):
+    new_game_button.show()
+    main_menu_button.show()
+    if game.collected >= TREATS:
+      display_win_text()
+    else:
+      display_dead_text()
 
 class Player:
   def __init__(self):
@@ -101,6 +120,7 @@ class Enemy:
       if self.y == player.y and self.x == player.x:
         dirty_tiles.append(((self.y, self.x), ENEMY))
         game.game_over = True
+        
     update_screen(dirty_tiles, self.image)
 
 def handle_map_action(row, col, tile_type, image):
@@ -114,11 +134,21 @@ def handle_map_action(row, col, tile_type, image):
     action(target_rect)
   if action == draw_circle:
     action(row, col, SCREEN)
+  if action == draw_wall:
+    action(target_rect, image)
 
 def draw_initial_screen():    
   for row, col in enumerate(MAP):
     for col, tile_type in enumerate(col):
-      handle_map_action(row, col, tile_type, DOG1 if tile_type == ENEMY1 else DOG2)
+      image = None
+      if tile_type == ENEMY1:
+        image = DOG1
+      if tile_type == ENEMY2:
+        image = DOG2
+      if tile_type == WALL:
+        image = WALL_IMG
+
+      handle_map_action(row, col, tile_type, image)
 
 def update_screen(dirty_tiles, image):
   for item in dirty_tiles:
@@ -130,21 +160,18 @@ def update_screen(dirty_tiles, image):
 def display_win_text():
   font = pygame.font.Font(None, 30)
   text = font.render("You Won!", True, WHITE)
-  text_rect = text.get_rect(center=(SCREEN_WIDTH // 2, SCREEN_HEIGHT // 2))
+  text_rect = text.get_rect(center=(SCREEN_WIDTH // 2, 15))
   SCREEN.blit(text, text_rect)
         
 def display_dead_text():
   font = pygame.font.Font(None, 30)
   text = font.render("You died!", True, WHITE)
-  text_rect = text.get_rect(center=(SCREEN_WIDTH // 2, SCREEN_HEIGHT // 2))
+  text_rect = text.get_rect(center=(SCREEN_WIDTH // 2, 15))
   SCREEN.blit(text, text_rect)
 
-draw_initial_screen()
+open_main_menu()
 game = Game()
 player = Player()
-
-new_game_button = pygame_gui.elements.UIButton(relative_rect=pygame.Rect((SCREEN.get_width() // 2 - 50, SCREEN.get_height() // 2 - 50, 100, 30)), text='New Game', manager=gui_manager)
-new_game_button.hide()
 
 while True:
   for event in pygame.event.get():
@@ -153,11 +180,21 @@ while True:
       sys.exit()
     if event.type == MOVE_ENEMY:
       for enemy in [game.enemy1, game.enemy2]:
-        enemy.move()
+        if game.running:
+          enemy.move()
     if event.type == pygame_gui.UI_BUTTON_PRESSED:
       if event.ui_element == new_game_button:
-        new_game_button.hide()
-        game.restart_game()
+        game.start()
+      if event.ui_element == tutorial:
+        print('tutorial')
+      if event.ui_element == credits:
+        open_credits()
+      if event.ui_element == shop_button:
+        print('shop')
+      if event.ui_element == main_menu_button:
+        close_credits()
+        game.running = False
+        game.game_over = True
     if event.type == pygame.KEYDOWN:
       cat_rect = pygame.Rect(player.x * TILE_SIZE, player.y * TILE_SIZE, TILE_SIZE, TILE_SIZE)
       if event.key == pygame.K_UP:
@@ -180,16 +217,13 @@ while True:
           player.move(1, 0)
         elif cat_rect.right == SCREEN_WIDTH and MAP[player.y][0] != WALL:
           player.move(-player.x, 0)
-    gui_manager.process_events(event)
+    UI.process_events(event)
 
-  if game.game_over:
-    new_game_button.show()
-    if game.collected >= TREATS:
-      display_win_text()
-    else:
-      display_dead_text()
+  if game.running and game.game_over:
+    game.stop()
+    game.end_game()
 
-  gui_manager.update(FPS)
+  UI.update(FPS)
   clock.tick(FPS)
-  gui_manager.draw_ui(SCREEN)
+  UI.draw_ui(SCREEN)
   pygame.display.update()
