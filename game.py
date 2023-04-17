@@ -5,7 +5,7 @@ import random
 from constants import *
 
 pygame.init()
-pygame.display.set_caption("Stormy vs. Purin")
+pygame.display.set_caption("Cat-man")
 pygame.time.set_timer(MOVE_ENEMY, ENEMY_SPEED_INTERVAL)
 collect_treat = pygame.mixer.Sound('assets/sounds/collect_treat.wav')
 clock = pygame.time.Clock()

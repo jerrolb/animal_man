@@ -40,7 +40,6 @@ NONE = (0, 0)
 
 BLACK = (0, 0, 0)
 WHITE = (255, 255, 255)
-GREEN = (205, 133, 63)
 BROWN = (150, 75, 0)
 
 SCREEN = pygame.display.set_mode((SCREEN_WIDTH, SCREEN_HEIGHT))
@@ -64,11 +63,11 @@ def draw_cat(target_rect):
   SCREEN.blit(CAT, target_rect)
 
 def draw_circle(row, col, screen):
-  screen.blit(TREAT_IMG, (col * TILE_SIZE + TILE_SIZE // 2, row * TILE_SIZE + TILE_SIZE // 2))
+  screen.blit(TREAT_IMG, (col * TILE_SIZE + TILE_SIZE // 2 - TREAT_IMG.get_height() / 2, row * TILE_SIZE + TILE_SIZE // 2 - TREAT_IMG.get_width() / 2))
 
 TILE_MAP = {
   FREE: (BLACK, None),
-  WALL: (GREEN, None),
+  WALL: (BROWN, None),
   TREAT: (BLACK, draw_circle),
   ENEMY: (None, draw_dog),
   ENEMY1: (None, draw_dog),
