@@ -1,4 +1,6 @@
-from constants import *
+import pygame
+import pygame_gui
+from constants import SCREEN, UI, BLACK
 from screens.main_menu import *
 
 settings_dropdown = pygame_gui.elements.UIDropDownMenu(

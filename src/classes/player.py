@@ -1,6 +1,6 @@
 from constants import FREE, TREAT, PLAYER, ENEMY, ENEMY_TREAT, TILE_SIZE
 from assets import CAT, collect_treat
-from components.hud.hud import display_treats
+from components.hud import hud
 
 class Player:
   def __init__(self):
@@ -10,6 +10,8 @@ class Player:
   
   def move(self, x, y, game, map):
     if game.game_over: return
+    game.running = True
+
     dirty_tiles = [((self.y, self.x), FREE)]
     self.x += x
     self.y += y
@@ -19,7 +21,7 @@ class Player:
       dirty_tiles.append(((self.y, self.x), PLAYER))
       game.collected += 1
       self.treats += 1
-      display_treats(self.treats)
+      hud.display_treats(self.treats)
       collect_treat.play()
     if location == FREE:
       dirty_tiles.append(((self.y, self.x), PLAYER))

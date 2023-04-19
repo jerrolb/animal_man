@@ -1,6 +1,7 @@
 import pygame
-from constants import SCREEN, BLACK, WHITE, SCREEN_WIDTH
+from constants import SCREEN, BLACK, WHITE, SCREEN_WIDTH, SCREEN_HEIGHT, UI
 from .main_menu import close_main_menu, main_menu_button, open_main_menu
+from assets import bg_image
 
 def open_credits():
   SCREEN.fill(BLACK)
@@ -9,6 +10,8 @@ def open_credits():
 
   font = pygame.font.Font(None, 30)
 
+  SCREEN.blit(bg_image, (0, 0))
+  
   text = font.render("Designer: Jane Brooks", True, WHITE)
   text_rect = text.get_rect(center=(SCREEN_WIDTH // 2, 30))
   SCREEN.blit(text, text_rect)

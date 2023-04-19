@@ -1,5 +1,5 @@
 import pygame
-from constants import BLACK, WHITE, SCREEN_WIDTH, SCREEN
+from constants import BLACK, WHITE, SCREEN_WIDTH, SCREEN, TILE_SIZE
 
 def display_treats(treats):
   font = pygame.font.Font(None, 36)
@@ -7,3 +7,8 @@ def display_treats(treats):
   text_rect = text.get_rect(topright=(SCREEN_WIDTH - 40, 30))
   pygame.draw.rect(SCREEN, BLACK, text_rect.inflate(10, 10))
   SCREEN.blit(text, text_rect)
+
+def display_hud():
+  hud_background = pygame.Surface((SCREEN_WIDTH, 2))
+  hud_background.fill((64, 64, 64, 50))
+  SCREEN.blit(hud_background, (0, TILE_SIZE - 4))

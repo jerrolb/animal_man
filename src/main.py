@@ -20,10 +20,15 @@ while True:
     if event.type == pygame.QUIT:
       pygame.quit()
       sys.exit()
+
+    if event.type == pygame.KEYDOWN:
+      move_player(event.key, player, game, map)
+
     if event.type == MOVE_ENEMY:
       for enemy in [game.enemy1, game.enemy2]:
         if game.running:
           enemy.move(game, player, map)
+
     if event.type == pygame_gui.UI_DROP_DOWN_MENU_CHANGED:
       if event.ui_element == settings_dropdown:
         game.set_difficulty(settings_dropdown.selected_option)
@@ -47,10 +52,7 @@ while True:
         SCREEN.fill(BLACK)
         close_credits()
         close_settings()
-
-    if event.type == pygame.KEYDOWN:
-      move_player(event, player, game, map)
-
+    
     UI.process_events(event)
 
   if game.running and game.game_over:

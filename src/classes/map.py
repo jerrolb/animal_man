@@ -1,6 +1,6 @@
 import pygame
 from constants import SCREEN, BROWN, ENEMY1, ENEMY2, WALL, PLAYER, FREE, TREAT, ENEMY, ENEMY_TREAT, BLACK, MAP1, MAP2, MAP3, MAP4, TILE_SIZE
-from assets import DOG1, DOG2, CAT, WALL_IMG
+from assets import DOG1, DOG2, CAT, WALL_IMG, TREAT_IMG
 
 class Map:
   def __init__(self):
@@ -31,8 +31,8 @@ class Map:
   def draw_player(self, target_rect, image):
     SCREEN.blit(image, target_rect)
 
-  def draw_treat(self, row, col, screen):
-    pygame.draw.circle(screen, BROWN, (col * TILE_SIZE + TILE_SIZE // 2, row * TILE_SIZE + TILE_SIZE // 2), 6)
+  def draw_treat(self, row, col):
+    SCREEN.blit(TREAT_IMG(TILE_SIZE), pygame.Rect(col * TILE_SIZE + TILE_SIZE / 4, row * TILE_SIZE + TILE_SIZE / 4, TILE_SIZE, TILE_SIZE))
 
   def draw_wall(self, target_rect, image):
     SCREEN.blit(image, target_rect)
@@ -48,7 +48,7 @@ class Map:
     if action == self.draw_player:
       action(target_rect, image)
     if action == self.draw_treat:
-      action(row, col, SCREEN)
+      action(row, col)
     if action == self.draw_wall:
       action(target_rect, image)
 
@@ -64,6 +64,8 @@ class Map:
           image = WALL_IMG(TILE_SIZE)
         if tile_type == PLAYER:
           image = CAT(TILE_SIZE)
+        if tile_type == TREAT:
+          image = TREAT_IMG(TILE_SIZE)
 
         self.handle_map_action(row, col, tile_type, image)
 

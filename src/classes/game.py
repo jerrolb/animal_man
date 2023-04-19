@@ -2,7 +2,7 @@ import pygame
 from constants import BLACK, SCREEN, MOVE_ENEMY, ENEMY_SPEED_MAP, WHITE, TILE_SIZE, SCREEN_WIDTH
 from assets import DOG1, DOG2
 from screens import close_main_menu, main_menu_button, new_game_button
-from components.hud.hud import display_treats
+from components.hud import hud
 
 class Game:
   def __init__(self):
@@ -17,7 +17,6 @@ class Game:
     SCREEN.fill(BLACK)
     close_main_menu()
     main_menu_button.hide()
-    self.running = True
     self.collected = 0
     self.game_over = False
     player.x = 1
@@ -27,7 +26,8 @@ class Game:
       for col, val in enumerate(col):
         map.map[row][col] = val
     map.draw_initial_screen()
-    display_treats(player.treats)
+    hud.display_hud()
+    hud.display_treats(player.treats)
     self.enemy1 = Enemy(map.enemy1_pos[0], map.enemy1_pos[1], DOG1(TILE_SIZE), map)
     self.enemy2 = Enemy(map.enemy2_pos[0], map.enemy2_pos[1], DOG2(TILE_SIZE), map)
 
