@@ -1,8 +1,8 @@
 import pygame
 import pygame_gui
 from constants import SCREEN, UI, BLACK
-from screens.main_menu import *
-
+from screens.main_menu import open_main_menu, close_main_menu, main_menu_button
+from assets import bg_image
 settings_dropdown = pygame_gui.elements.UIDropDownMenu(
   options_list=['Easy', 'Medium', 'Hard', 'Expert', 'Expert+'],
   starting_option='Easy',
@@ -25,6 +25,7 @@ def open_settings():
   settings_dropdown.show()
   map_dropdown.show()
   main_menu_button.show()
+  SCREEN.blit(bg_image, (0, 0))
 
 def close_settings():
   settings_dropdown.hide()

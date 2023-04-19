@@ -15,6 +15,7 @@ class Map:
       PLAYER: (None, self.draw_player)
     }
     self.default_map = MAP1
+    self.map_name = 'Map1'
     self.init_map()
 
   def init_map(self):
@@ -84,6 +85,7 @@ class Map:
       'Map4': MAP4,
     }
     self.default_map = map_map[map]
+    self.map_name = map
     self.init_map()
 
 map = Map()

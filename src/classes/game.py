@@ -26,7 +26,7 @@ class Game:
       for col, val in enumerate(col):
         map.map[row][col] = val
     map.draw_initial_screen()
-    hud.display_hud()
+    hud.display_hud(self.difficulty, map.map_name)
     hud.display_treats(player.treats)
     self.enemy1 = Enemy(map.enemy1_pos[0], map.enemy1_pos[1], DOG1(TILE_SIZE), map)
     self.enemy2 = Enemy(map.enemy2_pos[0], map.enemy2_pos[1], DOG2(TILE_SIZE), map)
@@ -48,13 +48,13 @@ class Game:
     pygame.time.set_timer(MOVE_ENEMY, ENEMY_SPEED_MAP[self.difficulty])
 
   def display_win_text(self):
-    font = pygame.font.Font(None, 30)
+    font = pygame.font.Font(None, 36)
     text = font.render("You Won!", True, WHITE)
     text_rect = text.get_rect(center=(SCREEN_WIDTH // 2, 30))
     SCREEN.blit(text, text_rect)
           
   def display_dead_text(self):
-    font = pygame.font.Font(None, 30)
+    font = pygame.font.Font(None, 36)
     text = font.render("You died!", True, WHITE)
     text_rect = text.get_rect(center=(SCREEN_WIDTH // 2, 30))
     SCREEN.blit(text, text_rect)
