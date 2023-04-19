@@ -38,7 +38,7 @@ class Map:
     SCREEN.blit(image, target_rect)
 
   def handle_map_action(self, row, col, tile_type, image):
-    row += 2
+    row += 1
     target_rect = pygame.Rect(col * TILE_SIZE, row * TILE_SIZE, TILE_SIZE, TILE_SIZE)
     color, action = self.tile_map.get(tile_type, (None, None))
     if color:

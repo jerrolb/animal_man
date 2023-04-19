@@ -2,6 +2,7 @@ import pygame
 from constants import BLACK, SCREEN, MOVE_ENEMY, ENEMY_SPEED_MAP, WHITE, TILE_SIZE, SCREEN_WIDTH
 from assets import DOG1, DOG2
 from screens import close_main_menu, main_menu_button, new_game_button
+from components.hud.hud import display_treats
 
 class Game:
   def __init__(self):
@@ -26,6 +27,7 @@ class Game:
       for col, val in enumerate(col):
         map.map[row][col] = val
     map.draw_initial_screen()
+    display_treats(player.treats)
     self.enemy1 = Enemy(map.enemy1_pos[0], map.enemy1_pos[1], DOG1(TILE_SIZE), map)
     self.enemy2 = Enemy(map.enemy2_pos[0], map.enemy2_pos[1], DOG2(TILE_SIZE), map)
 
@@ -37,24 +39,24 @@ class Game:
     new_game_button.show()
     main_menu_button.show()
     if game.collected >= map.num_treats:
-      self.display_win_text(map)
+      self.display_win_text()
     else:
-      self.display_dead_text(map)
+      self.display_dead_text()
   
   def set_difficulty(self, difficulty):
     self.difficulty = difficulty
     pygame.time.set_timer(MOVE_ENEMY, ENEMY_SPEED_MAP[self.difficulty])
 
-  def display_win_text(self, map):
+  def display_win_text(self):
     font = pygame.font.Font(None, 30)
     text = font.render("You Won!", True, WHITE)
-    text_rect = text.get_rect(center=(SCREEN_WIDTH // 2, 15))
+    text_rect = text.get_rect(center=(SCREEN_WIDTH // 2, 30))
     SCREEN.blit(text, text_rect)
           
-  def display_dead_text(self, map):
+  def display_dead_text(self):
     font = pygame.font.Font(None, 30)
     text = font.render("You died!", True, WHITE)
-    text_rect = text.get_rect(center=(SCREEN_WIDTH // 2, 15))
+    text_rect = text.get_rect(center=(SCREEN_WIDTH // 2, 30))
     SCREEN.blit(text, text_rect)
 
 game = Game()
