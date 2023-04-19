@@ -1,5 +1,6 @@
-from constants import *
-from screens.main_menu import *
+import pygame
+from constants import SCREEN, BLACK, WHITE, SCREEN_WIDTH
+from .main_menu import close_main_menu, main_menu_button, open_main_menu
 
 def open_credits():
   SCREEN.fill(BLACK)

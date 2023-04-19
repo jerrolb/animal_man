@@ -9,7 +9,7 @@ class ReloadHandler(FileSystemEventHandler):
   def on_modified(self, event):
     if self.running_process:
       self.running_process.kill()
-    self.running_process = subprocess.Popen(["python3", 'game.py'])
+    self.running_process = subprocess.Popen(["python3", 'src/main.py'])
 
 if __name__ == "__main__":
   event_handler = ReloadHandler()
