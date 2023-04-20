@@ -9,9 +9,9 @@ def display_treats(treats):
   SCREEN.blit(text, text_rect)
 
 def display_hud(difficulty, map_name):
-  hud_background = pygame.Surface((SCREEN_WIDTH, 2))
+  hud_background = pygame.Surface((SCREEN_WIDTH, 3))
   hud_background.fill((64, 64, 64, 50))
-  SCREEN.blit(hud_background, (0, TILE_SIZE - 4))
+  SCREEN.blit(hud_background, (0, TILE_SIZE - 1))
 
   font = pygame.font.Font(None, 36)
   text = font.render(f"Difficulty: {difficulty}", True, WHITE)

@@ -1,5 +1,5 @@
 from constants import FREE, TREAT, PLAYER, ENEMY, ENEMY_TREAT, TILE_SIZE
-from assets import CAT, collect_treat
+from assets import get_cat_img, collect_treat
 from components.hud import hud
 
 class Player:
@@ -8,7 +8,7 @@ class Player:
     self.y = 1
     self.treats = 0
   
-  def move(self, x, y, game, map):
+  def move(self, x, y, game, map, direction):
     if game.game_over: return
     game.running = True
 
@@ -28,6 +28,6 @@ class Player:
     if location in [ENEMY, ENEMY_TREAT] or game.collected >= map.num_treats:
       game.game_over = True
 
-    map.update_screen(dirty_tiles, CAT(TILE_SIZE))
+    map.update_screen(dirty_tiles, get_cat_img(direction), direction)
 
 player = Player()

@@ -33,7 +33,6 @@ while True:
       if event.ui_element == settings_dropdown:
         game.set_difficulty(settings_dropdown.selected_option)
       if event.ui_element == map_dropdown:
-        print(map_dropdown.selected_option)
         map.set_map(map_dropdown.selected_option)
     if event.type == pygame_gui.UI_BUTTON_PRESSED:
       if event.ui_element == settings_button:

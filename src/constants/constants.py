@@ -13,6 +13,7 @@ NONE = (0, 0)
 BLACK = (0, 0, 0)
 WHITE = (255, 255, 255)
 BROWN = (150, 75, 0)
+LIGHT_BROWN = (230, 200, 170)
 
 FREE = 0
 WALL = 1

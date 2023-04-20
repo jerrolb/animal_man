@@ -2,10 +2,10 @@ from constants import ENEMY_TREAT, UP, LEFT, RIGHT, DOWN, NONE, ENEMY, WALL, TRE
 import random
 
 class Enemy:
-  def __init__(self, y, x, image, map):
+  def __init__(self, y, x, image_func, map):
     self.x = x
     self.y = y
-    self.image = image
+    self.image_func = image_func
     map.map[self.y][self.x] = ENEMY_TREAT
 
   def move(self, game, player, map):
@@ -26,18 +26,18 @@ class Enemy:
     if not moves:
         moves.append(NONE)
 
-    dir = random.choice(moves)
-    is_valid_move = 0 <= self.y + dir[1] < len(map.map) and 0 <= self.x + dir[0] < len(map.map[self.y + dir[1] - 1])
-    next_pos = map.map[self.y + dir[1]][self.x + dir[0]]
+    direction = random.choice(moves)
+    is_valid_move = 0 <= self.y + direction[1] < len(map.map) and 0 <= self.x + direction[0] < len(map.map[self.y + direction[1] - 1])
+    next_pos = map.map[self.y + direction[1]][self.x + direction[0]]
 
     if is_valid_move and next_pos not in [ENEMY_TREAT, ENEMY, WALL]:
       if map.map[self.y][self.x] == ENEMY_TREAT:
         dirty_tiles.append(((self.y, self.x), TREAT))
       else:
         dirty_tiles.append(((self.y, self.x), FREE))
-
-      self.x += dir[0]
-      self.y += dir[1]
+        
+      self.x += direction[0]
+      self.y += direction[1]
 
       if map.map[self.y][self.x] == TREAT:
         dirty_tiles.append(((self.y, self.x), ENEMY_TREAT))
@@ -47,4 +47,16 @@ class Enemy:
         dirty_tiles.append(((self.y, self.x), ENEMY))
         game.game_over = True
         
-    map.update_screen(dirty_tiles, self.image)
+    
+    sprite_direction = None
+    if direction == UP:
+      sprite_direction = 'up'
+    if direction == RIGHT:
+      sprite_direction = 'right'
+    if direction == DOWN:
+      sprite_direction = 'down'
+    if direction == LEFT:
+      sprite_direction = 'left'
+    
+    if direction is not NONE:
+      map.update_screen(dirty_tiles, self.image_func(sprite_direction), sprite_direction)

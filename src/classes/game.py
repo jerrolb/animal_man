@@ -1,7 +1,7 @@
 import pygame
 from constants import BLACK, SCREEN, MOVE_ENEMY, ENEMY_SPEED_MAP, WHITE, TILE_SIZE, SCREEN_WIDTH
-from assets import DOG1, DOG2
-from screens import close_main_menu, main_menu_button, new_game_button
+from assets import get_enemy1_img, get_enemy2_image
+from screens import close_main_menu, main_menu_button, new_game_button, settings_button, close_settings
 from components.hud import hud
 
 class Game:
@@ -15,6 +15,7 @@ class Game:
 
   def start(self, map, Enemy, player):
     SCREEN.fill(BLACK)
+    close_settings()
     close_main_menu()
     main_menu_button.hide()
     self.collected = 0
@@ -28,8 +29,8 @@ class Game:
     map.draw_initial_screen()
     hud.display_hud(self.difficulty, map.map_name)
     hud.display_treats(player.treats)
-    self.enemy1 = Enemy(map.enemy1_pos[0], map.enemy1_pos[1], DOG1(TILE_SIZE), map)
-    self.enemy2 = Enemy(map.enemy2_pos[0], map.enemy2_pos[1], DOG2(TILE_SIZE), map)
+    self.enemy1 = Enemy(map.enemy1_pos[0], map.enemy1_pos[1], get_enemy1_img, map)
+    self.enemy2 = Enemy(map.enemy2_pos[0], map.enemy2_pos[1], get_enemy2_image, map)
 
   def stop(self):
     self.running = False
@@ -38,6 +39,7 @@ class Game:
   def end_game(self, map):
     new_game_button.show()
     main_menu_button.show()
+    settings_button.show()
     if game.collected >= map.num_treats:
       self.display_win_text()
     else:
