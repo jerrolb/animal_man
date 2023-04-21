@@ -7,6 +7,9 @@ class Player:
     self.x = 1
     self.y = 1
     self.treats = 0
+    
+  def throw_toy(self, game):
+    if game.game_over: return
   
   def move(self, x, y, game, map, direction):
     if game.game_over: return

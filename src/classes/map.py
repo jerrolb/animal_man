@@ -51,6 +51,8 @@ class Map:
       if direction == 'left':
         current_position.x = current_position.x - 8
 
+      SCREEN.blit(grass_img, curr_ref)
+      SCREEN.blit(grass_img, target_rect)
       SCREEN.blit(image, current_position)
       pygame.display.flip()
       
@@ -76,8 +78,6 @@ class Map:
     curr_ref = current_position.copy()
     
     for i in range(0, TILE_SIZE // 8):
-      SCREEN.blit(grass_img, current_position)
-
       if direction == 'up':
         current_position.y = current_position.y - 8
       if direction == 'right':
@@ -85,15 +85,16 @@ class Map:
       if direction == 'down':
         if current_position.y > TILE_SIZE:
           current_position.y = current_position.y + 8
-        else: 
+        else:
           break
       if direction == 'left':
         current_position.x = current_position.x - 8
-
+    
+      SCREEN.blit(grass_img, curr_ref)
+      SCREEN.blit(grass_img, target_rect)
       SCREEN.blit(image, current_position)
       pygame.display.flip()
       
-    SCREEN.blit(grass_img, curr_ref)
     SCREEN.blit(image, target_rect)
 
   def draw_treat(self, row, col):
