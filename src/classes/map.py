@@ -17,9 +17,11 @@ class Map:
     }
     self.default_map = MAP1
     self.map_name = 'Map1'
+    self.toys = []
     self.init_map()
 
   def init_map(self):
+    self.toys = []
     self.map = [row[:] for row in self.default_map]
     self.width = len(self.map[0])
     self.height = len(self.map)
@@ -62,6 +64,9 @@ class Map:
       self.draw_treat(row, col)
       
     SCREEN.blit(image, target_rect)
+    
+    if len(self.toys) > 0 and target_rect.x // TILE_SIZE == self.toys[0][0] and target_rect.y // TILE_SIZE == self.toys[0][1]:
+      self.toys.pop()
 
   def draw_player(self, target_rect, image, direction):
     current_position = target_rect.copy()
@@ -96,6 +101,9 @@ class Map:
       pygame.display.flip()
       
     SCREEN.blit(image, target_rect)
+    
+    if len(self.toys) > 0 and target_rect.x // TILE_SIZE == self.toys[0][0] and target_rect.y // TILE_SIZE == self.toys[0][1]:
+      self.toys.pop()
 
   def draw_treat(self, row, col):
     SCREEN.blit(grass_img, pygame.Rect(col * TILE_SIZE, row * TILE_SIZE, TILE_SIZE, TILE_SIZE))

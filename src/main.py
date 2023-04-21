@@ -22,7 +22,12 @@ while True:
       sys.exit()
 
     if event.type == pygame.KEYDOWN:
-      move_player(event.key, player, game, map)
+      if event.key == pygame.K_SPACE:
+        player.throw_toy(player, game, map)
+      else:
+        move_player(event.key, player, game, map)
+      
+    
 
     if event.type == MOVE_ENEMY:
       for enemy in [game.enemy1, game.enemy2]:

@@ -10,8 +10,14 @@ class Enemy:
 
   def move(self, game, player, map):
     if game.game_over: return
-    x_dir = player.x - self.x
-    y_dir = player.y - self.y
+    
+    if len(map.toys):
+      x_dir = map.toys[0][0] - self.x
+      y_dir = map.toys[0][1] - self.y
+    else:
+      x_dir = player.x - self.x
+      y_dir = player.y - self.y
+
     moves = []
     dirty_tiles = []
 

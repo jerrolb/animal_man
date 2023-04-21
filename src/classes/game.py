@@ -26,7 +26,9 @@ class Game:
     for row, col in enumerate(map.default_map):
       for col, val in enumerate(col):
         map.map[row][col] = val
+    map.toys = []
     map.draw_initial_screen()
+    player.toys = 1
     hud.display_hud(self.difficulty, map.map_name)
     hud.display_treats(player.treats)
     self.enemy1 = Enemy(map.enemy1_pos[0], map.enemy1_pos[1], get_enemy1_img, map)

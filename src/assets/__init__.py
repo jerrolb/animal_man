@@ -15,6 +15,7 @@ wall2_path = os.path.join(assets_dir, "images", "wall2.jpeg")
 splash_path = os.path.join(assets_dir, "images", "splash.png")
 treat_path = os.path.join(assets_dir, "images", "treat.png")
 free_path = os.path.join(assets_dir, "images", "grass.png")
+toy_path = os.path.join(assets_dir, "images", "chew_toy.png")
 collect_treat_path = os.path.join(assets_dir, "sounds", "collect_treat.wav")
 
 def scale_img(image, width = TILE_SIZE, height = TILE_SIZE):
@@ -27,6 +28,7 @@ enemy2_sprite = pygame.image.load(enemy2_path)
 wall1_img = scale_img(pygame.image.load(wall1_path))
 wall2_img = scale_img(pygame.image.load(wall2_path))
 grass_img = scale_img(pygame.image.load(free_path))
+toy_img = scale_img(pygame.image.load(toy_path))
 bg_image = scale_img(pygame.image.load(splash_path), SCREEN_WIDTH, SCREEN_HEIGHT)
 bg_image.set_alpha(100)
 
