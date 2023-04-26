@@ -10,7 +10,7 @@ from screens.credits import *
 from screens.settings import *
 from screens.shop import *
 from classes import player, game, map, Enemy
-from event_handlers import move_player
+from event_handlers import move_player, blit_queue
 from api import get_player_stats
 from components.hud import hud
 import api
@@ -22,34 +22,7 @@ get_player_stats(player)
 open_main_menu()
 
 while True:
-  if (len(map.enemy_moves[1])):
-    blit1 = map.enemy_moves[1].popleft()
-    if blit1[0] == 'treat':
-      map.draw_treat(blit1[1], blit1[2])
-    elif blit1[0] == 'group':
-      SCREEN.blit(blit1[1][0], blit1[1][1])
-      SCREEN.blit(blit1[2][0], blit1[2][1])
-      SCREEN.blit(blit1[3][0], blit1[3][1])
-    else:
-      SCREEN.blit(blit1[0], blit1[1])
-  if (len(map.enemy_moves[2])):
-    blit2 = map.enemy_moves[2].popleft()
-    if blit2[0] == 'treat':
-      map.draw_treat(blit2[1], blit2[2])
-    elif blit2[0] == 'group':
-      SCREEN.blit(blit2[1][0], blit2[1][1])
-      SCREEN.blit(blit2[2][0], blit2[2][1])
-      SCREEN.blit(blit2[3][0], blit2[3][1])
-    else:
-      SCREEN.blit(blit2[0], blit2[1])
-  if (len(map.player_moves)):
-    player_blit = map.player_moves.popleft()
-    if player_blit[0] == 'group':
-      SCREEN.blit(player_blit[1][0], player_blit[1][1])
-      SCREEN.blit(player_blit[2][0], player_blit[2][1])
-      SCREEN.blit(player_blit[3][0], player_blit[3][1])
-    else:
-      SCREEN.blit(player_blit[0], player_blit[1])
+  blit_queue(map)
       
   UI.update(FPS)
   clock.tick(FPS)
