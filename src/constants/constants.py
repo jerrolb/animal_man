@@ -27,6 +27,7 @@ ENEMY2 = -2
 SCREEN_WIDTH = 1280
 SCREEN_HEIGHT = 720
 SCREEN = pygame.display.set_mode((SCREEN_WIDTH, SCREEN_HEIGHT))
+MOVEMENT_SURFACE = pygame.Surface((TILE_SIZE, TILE_SIZE))
 UI = pygame_gui.UIManager(SCREEN.get_size())
 
 MOVE_ENEMY = pygame.USEREVENT + 2
@@ -39,4 +40,12 @@ ENEMY_SPEED_MAP = {
   'Hard': 300,
   'Expert': 200,
   'Expert+': 100,
+}
+
+DIFFICULTY_TO_TREATS = {
+  'Easy': 100,
+  'Medium': 200,
+  'Hard': 400,
+  'Expert': 800,
+  'Expert+': 1600,
 }

@@ -65,28 +65,28 @@ player_dir_images = {
 
 enemy1_dir_images = {
   'down': {
-    1: enemy1_sprite.subsurface(0, 0, 40, 40),
-    2: enemy1_sprite.subsurface(40, 0, 40, 40),
-    3: enemy1_sprite.subsurface(80, 0, 40, 40),
-    4: enemy1_sprite.subsurface(120, 0, 40, 40),
-  },
-  'left': {
-    1: enemy1_sprite.subsurface(0, 40, 40, 40),
-    2: enemy1_sprite.subsurface(40, 40, 40, 40),
-    3: enemy1_sprite.subsurface(80, 40, 40, 40),
-    4: enemy1_sprite.subsurface(120, 40, 40, 40),
+    1: enemy1_sprite.subsurface(0, 0, 80, 80),
+    2: enemy1_sprite.subsurface(80, 0, 80, 80),
+    3: enemy1_sprite.subsurface(160, 0, 80, 80),
+    4: enemy1_sprite.subsurface(240, 0, 80, 80),
   },
   'right': {
-    1: enemy1_sprite.subsurface(0, 80, 40, 40),
-    2: enemy1_sprite.subsurface(40, 80, 40, 40),
-    3: enemy1_sprite.subsurface(80, 80, 40, 40),
-    4: enemy1_sprite.subsurface(120, 80, 40, 40),
+    1: enemy1_sprite.subsurface(0, 80, 80, 80),
+    2: enemy1_sprite.subsurface(80, 80, 80, 80),
+    3: enemy1_sprite.subsurface(160, 80, 80, 80),
+    4: enemy1_sprite.subsurface(240, 80, 80, 80),
   },
   'up': {
-    1: enemy1_sprite.subsurface(0, 120, 40, 40),
-    2: enemy1_sprite.subsurface(40, 120, 40, 40),
-    3: enemy1_sprite.subsurface(80, 120, 40, 40),
-    4: enemy1_sprite.subsurface(120, 120, 40, 40),
+    1: enemy1_sprite.subsurface(0, 160, 80, 80),
+    2: enemy1_sprite.subsurface(80, 160, 80, 80),
+    3: enemy1_sprite.subsurface(160, 160, 80, 80),
+    4: enemy1_sprite.subsurface(240, 160, 80, 80),
+  },
+  'left': {
+    1: enemy1_sprite.subsurface(0, 240, 80, 80),
+    2: enemy1_sprite.subsurface(80, 240, 80, 80),
+    3: enemy1_sprite.subsurface(160, 240, 80, 80),
+    4: enemy1_sprite.subsurface(240, 240, 80, 80),
   },
 }
 
