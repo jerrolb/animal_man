@@ -92,28 +92,24 @@ enemy1_dir_images = {
 
 enemy2_dir_images = {
   'down': {
-    1: enemy2_sprite.subsurface(0, 0, 50, 48),
-    2: enemy2_sprite.subsurface(50, 0, 50, 48),
-    3: enemy2_sprite.subsurface(100, 0, 50, 48),
-    4: enemy2_sprite.subsurface(150, 0, 50, 48),
+    1: enemy2_sprite.subsurface(0, 0, 130, 127.5),
+    2: enemy2_sprite.subsurface(130, 0, 130, 127.5),
+    3: enemy2_sprite.subsurface(260, 0, 130, 127.5),
   },
   'left': {
-    1: enemy2_sprite.subsurface(0, 48, 50, 48),
-    2: enemy2_sprite.subsurface(50, 48, 50, 48),
-    3: enemy2_sprite.subsurface(100, 48, 50, 48),
-    4: enemy2_sprite.subsurface(150, 48, 50, 48),
+    1: enemy2_sprite.subsurface(0, 127.5, 130, 127.5),
+    2: enemy2_sprite.subsurface(130, 127.5, 130, 127.5),
+    3: enemy2_sprite.subsurface(260, 127.5, 130, 127.5),
   },
   'right': {
-    1: enemy2_sprite.subsurface(0, 96, 50, 48),
-    2: enemy2_sprite.subsurface(50, 96, 50, 48),
-    3: enemy2_sprite.subsurface(100, 96, 50, 48),
-    4: enemy2_sprite.subsurface(150, 96, 50, 48),
+    1: enemy2_sprite.subsurface(0, 255, 130, 127.5),
+    2: enemy2_sprite.subsurface(130, 255, 130, 127.5),
+    3: enemy2_sprite.subsurface(260, 255, 130, 127.5),
   },
   'up': {
-    1: enemy2_sprite.subsurface(0, 144, 50, 48),
-    2: enemy2_sprite.subsurface(50, 144, 50, 48),
-    3: enemy2_sprite.subsurface(100, 144, 50, 48),
-    4: enemy2_sprite.subsurface(150, 144, 50, 48),
+    1: enemy2_sprite.subsurface(0, 382.5, 130, 127.5),
+    2: enemy2_sprite.subsurface(130, 382.5, 130, 127.5),
+    3: enemy2_sprite.subsurface(260, 382.5, 130, 127.5),
   },
 }
 
@@ -130,7 +126,7 @@ def get_enemy1_img(direction):
   return enemy1_dir_images[direction][random.randint(1,4)]
 
 def get_enemy2_image(direction):
-  return enemy2_dir_images[direction][random.randint(1,4)]
+  return enemy2_dir_images[direction][random.randint(1,3)]
 
 def get_wall_img(random_wall):
   return walls[random_wall]

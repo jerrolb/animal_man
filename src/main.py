@@ -16,7 +16,7 @@ from components.hud import hud
 import api
 
 pygame.display.set_mode((SCREEN_WIDTH, SCREEN_HEIGHT))
-pygame.display.set_caption("Cat-man")
+pygame.display.set_caption("Stormy's Grand Escape")
 clock = pygame.time.Clock()
 get_player_stats(player)
 open_main_menu()
